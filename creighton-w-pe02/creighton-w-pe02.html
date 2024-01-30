@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>More Greeter</title>
+  <style>
+    @font-face {
+      font-family: 'Roboto';
+      src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    * {
+      font-size: 1.5em;
+    }
+
+    button {
+      height: 50px;
+      width: 150px;
+      font-size: 14pt;
+      margin-right: 10px;
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        background-color: red;
+        padding: 100px;
+      }
+    }
+  </style>
+  <script>
+    window.onload = () => {
+      // Get references to the elements
+      const btnHello = document.getElementById('btn-hello');
+      const btnGoodbye = document.getElementById('btn-goodbye');
+      const shoutifyCheckbox = document.getElementById('checkbox-shoutify');
+
+      // Greet function, handle message to display
+      const greet = (greeting) => {
+        const firstNameInput = document.getElementById('input-firstname');
+        const lastNameInput = document.getElementById('input-lastname');
+
+        let firstName = firstNameInput.value.trim() || 'Peter';
+        let lastName = lastNameInput.value.trim() || 'Parker';
+
+        // Display the greeting
+        const outputParagraph = document.getElementById('output');
+        outputParagraph.innerHTML = `${greeting}, ${firstName} ${lastName}!`;
+      };
+
+      // Handle Shoutify checkbox
+      const handleShoutify = () => {
+        const outputParagraph = document.getElementById('output');
+
+        // Shoutify if the checkbox is checked, otherwise revert
+        if (shoutifyCheckbox.checked) {
+          outputParagraph.innerHTML = outputParagraph.innerHTML.toUpperCase();
+        } else {
+          outputParagraph.innerHTML = outputParagraph.innerHTML.toLowerCase();
+        }
+      };
+
+      // Add click events to buttons and checkbox
+      btnHello.addEventListener('click', () => greet('Hello'));
+      btnGoodbye.addEventListener('click', () => greet('Goodbye'));
+      shoutifyCheckbox.addEventListener('change', handleShoutify);
+    };
+  </script>
+</head>
+<body>
+  <button id="btn-hello">Say Hello!</button>
+  <button id="btn-goodbye">Say Goodbye!</button>
+  <input id="input-firstname" placeholder="Enter your first name...">
+  <input id="input-lastname" placeholder="Enter your last name...">
+  <p id="output">???</p>
+  <label>
+    Shoutify:
+    <input type="checkbox" id="checkbox-shoutify">
+  </label>
+</body>
+</html>
