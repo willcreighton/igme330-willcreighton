@@ -37,6 +37,7 @@
       const btnHello = document.getElementById('btn-hello');
       const btnGoodbye = document.getElementById('btn-goodbye');
       const shoutifyCheckbox = document.getElementById('checkbox-shoutify');
+      let unshoutifiedStr = "???";
 
       // Greet function, handle message to display
       const greet = (greeting) => {
@@ -49,17 +50,27 @@
         // Display the greeting
         const outputParagraph = document.getElementById('output');
         outputParagraph.innerHTML = `${greeting}, ${firstName} ${lastName}!`;
+        
+        // Check to see if Shoutify is active when greeting
+        if (shoutifyCheckbox.checked) {
+          outputParagraph.innerHTML = outputParagraph.innerHTML.toUpperCase();
+        }
       };
 
-      // Handle Shoutify checkbox
+      // Handle Shoutify checkbox dynamically
       const handleShoutify = () => {
         const outputParagraph = document.getElementById('output');
+
+        // Track the unshoutified text
+        if (outputParagraph.innerHTML !== outputParagraph.innerHTML.toUpperCase()) {
+          unshoutifiedStr = outputParagraph.innerHTML;
+        }
 
         // Shoutify if the checkbox is checked, otherwise revert
         if (shoutifyCheckbox.checked) {
           outputParagraph.innerHTML = outputParagraph.innerHTML.toUpperCase();
         } else {
-          outputParagraph.innerHTML = outputParagraph.innerHTML.toLowerCase();
+          outputParagraph.innerHTML = unshoutifiedStr;
         }
       };
 
