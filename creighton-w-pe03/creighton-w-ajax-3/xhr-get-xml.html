@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>XHR - Load Text</title>
+    <title>XHR - Load XML</title>
     <style>
         body {
             font-family: sans-serif;
@@ -11,9 +11,7 @@
     </style>
 </head>
 <body>
-    <h2>XHR - Load Text File</h2>
-    <p>The <code>pet-names.txt</code> file contains popular dog and cat pet names, separated by commas.</p>
-    <p>Note that because XHR is loading a local file, this and the other examples will have to be run off a web server rather than from your computer's hard drive (e.g. banjo.rit.edu or VSCode's liveserver etc)</p>
+    <h2>XHR - Load XML File</h2>
 
     <hr>
     <button id="my-button">Load Data</button>
@@ -21,12 +19,12 @@
 
     <script>
         // Event listener for button click
-        document.querySelector("#my-button").onclick = loadTextXHR;
+        document.querySelector("#my-button").onclick = loadXmlXhr;
 
-        // Function to load text using XMLHttpRequest (XHR)
-        function loadTextXHR() {
-            // URL of the text file
-            const url = "data/pet-names.csv";
+        // Function to load xml using XMLHttpRequest (XHR)
+        function loadXmlXhr() {
+            // URL of the xml file
+            const url = "data/pet-names.xml";
 
             // Create a new XMLHttpRequest object
             const xhr = new XMLHttpRequest();
@@ -34,21 +32,22 @@
             // Event handler for successful response
             xhr.onload = (e) => {
                 console.log(`In onload - HTTP Status Code = ${e.target.status}`);
+                const xml = e.target.responseXML;
 
-                // Get and print the text content from the response
-                const text = e.target.responseText;
-                console.log(`Success - the file length is ${text.length}`);
+                // Guard clause to check if the response is not XML
+                if (!xml) {
+                    document.querySelector("#output").innerHTML = "Error: The response is not XML";
+                    return;
+                }
 
-                // Utilize array destructuring to split the text into three arrays
-                let [dogNames, catNames, birdNames] = text.split("\n");
-                dogNames = dogNames.split(",");
-                catNames = catNames.split(",");
-                birdNames = birdNames.split(",");
+                const dogNames = xml.querySelector("namelist[cid='dognames']").textContent.split(",");
+                const catNames = xml.querySelector("namelist[cid='catnames']").textContent.split(",");
+                const birdNames = xml.querySelector("namelist[cid='birdnames']").textContent.split(",");
 
-                // Prepare and display the names
                 const dogHtml = dogNames.map(w => `<li>${w}</li>`).join("");
                 const catHtml = catNames.map(w => `<li>${w}</li>`).join("");
                 const birdHtml = birdNames.map(w => `<li>${w}</li>`).join("");
+
                 document.querySelector("#output").innerHTML = `<h3>Dog Names</h3><ol>${dogHtml}</ol><h3>Cat Names</h3><ol>${catHtml}</ol><h3>Bird Names</h3><ol>${birdHtml}</ol>`;
             };
 
