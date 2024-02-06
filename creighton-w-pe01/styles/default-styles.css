@@ -21,7 +21,7 @@ p#output {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-button#myButton {
+button#default-btn {
     background-color: #3498db;
     color: #fff;
     border: none;
@@ -32,7 +32,19 @@ button#myButton {
     transition: background-color 0.3s;
 }
 
-button#myButton:hover {
+button#hidden-btn {
+    display: none;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+button#default-btn:hover {
     background-color: #2980b9;
 }
 
@@ -80,7 +92,7 @@ button#myButton:hover {
         background-color: #23d160;
     }
 
-    #myButton {
+    #default-btn {
         width: 300px;
         height: 75pt;
         font-size: 1.5rem;
@@ -109,5 +121,13 @@ button#myButton:hover {
 
     #output {
         text-align: left;
+    }
+}
+
+@media only screen and (min-width: 1408px) {
+    button#hidden-btn {
+        display: inline-block;
+        height: 75pt;
+        width: 300px;
     }
 }
