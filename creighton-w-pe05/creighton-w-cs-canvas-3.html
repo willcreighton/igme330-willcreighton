@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Third Canvas</title>
+	<style>
+	canvas{
+		border:1px solid gray;
+	}
+	</style>
+	<script>
+		"use strict";
+		
+		window.onload = init;
+
+        function getRandomColor(){
+            function getByte(){
+                return 55 + Math.round(Math.random() * 200);
+            }
+
+            return "rgba(" + getByte() + "," + getByte() + "," + getByte() + ",.8)";
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+	
+		function init(){
+			// Create the canvas
+			let canvas = document.querySelector("canvas");
+            canvas.style.backgroundColor = "lightgray";
+			
+			let ctx = canvas.getContext("2d");
+		}
+	</script>
+</head>
+<body>
+	<canvas width="640" height="480">
+		Get a real browser!
+	</canvas>
+</body>
+</html>
