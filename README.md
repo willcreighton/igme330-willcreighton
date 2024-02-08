@@ -4,11 +4,11 @@ Welcome to my repository for IGME 330, Rich Media Web Application Development I.
 
 ## Contents:
 
-### 1. In-Class Exercises
-[In-Class-Exercises](./_in-class-exercises/)
+### 1. Class Exercises
+[Access them here!](./class-exercises/)
 
 ### 2. Practice Exercises (PEs)
-[In-Class-Exercises](./_in-class-exercises/)
+[Access them here!](./practice-exercises/)
 
 ### 3. Homework Assignments (HWs)
-[In-Class-Exercises](./_in-class-exercises/)
+[Access them here!](./homework-assignments/)
