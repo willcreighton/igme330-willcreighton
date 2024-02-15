@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Third Canvas</title>
+	<style>
+	canvas{
+		border:1px solid gray;
+	}
+	</style>
+	<script>
+
+		"use strict";
+		
+		window.onload = init;
+	
+		function init() {
+            // Helper functions
+            function getRandomColor() {
+                function getByte(){
+                    return 55 + Math.round(Math.random() * 200);
+                }
+
+                return "rgba(" + getByte() + "," + getByte() + "," + getByte() + ",.8)";
+            }
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            function drawRandomRect() {
+                let canvas = document.querySelector("canvas");
+                const ctx = canvas.getContext('2d');
+
+                let width = getRandomInt(10, 40);
+                let height = getRandomInt(10, 40);
+                let x = getRandomInt(0, canvas.width - width);
+                let y = getRandomInt(0, canvas.height - height);
+
+                ctx.fillStyle = getRandomColor();
+                ctx.fillRect(x, y, width, height);
+            }
+            function drawRandomCircle() {
+                let canvas = document.querySelector("canvas");
+                const ctx = canvas.getContext('2d');
+
+                let radius = getRandomInt(10, 40);
+                let x = getRandomInt(0 + radius, canvas.width - radius);
+                let y = getRandomInt(0 + radius, canvas.height - radius);
+
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = getRandomColor();
+                ctx.fill();
+            }
+            function drawRandomLine() {
+                let canvas = document.querySelector("canvas");
+                const ctx = canvas.getContext('2d');
+
+                let x1 = getRandomInt(0, canvas.width);
+                let y1 = getRandomInt(0, canvas.height);
+                let x2 = getRandomInt(0, canvas.width);
+                let y2 = getRandomInt(0, canvas.height);
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = getRandomColor();
+                ctx.stroke();
+            }
+
+            // Handle the animations
+            function animate() {
+                drawRandomRect();
+                drawRandomCircle();
+                drawRandomLine();
+                requestAnimationFrame(animate);
+            }
+
+            // Execute the animations
+            animate();
+		}
+	</script>
+</head>
+<body>
+	<canvas width="640" height="480">
+		Get a real browser!
+	</canvas>
+</body>
+</html>
