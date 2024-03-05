@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Sine Start</title>
+	<style>canvas{ border: 1px solid black; }</style>
+	<script>
+	"use strict";
+	const canvasWidth = 400, canvasHeight = 300;
+	let ctx;
+    let c = 4;
+    let n = 0;
+    let divergence = 137.5;
+    const fps = 60;
+    const dotRadius = 2;
+
+    window.onload = init;
+
+	function init(){
+		ctx = canvas.getContext("2d");
+		canvas.width = canvasWidth;
+		canvas.height = canvasHeight;
+		ctx.fillRect(0,0,canvasWidth,canvasHeight);
+        loop();
+	}
+
+    function loop() {
+        setTimeout(loop, 1000 / fps);
+        c += 0.01;
+        divergence += 0.01;
+
+        n++;
+
+        let a = n * dtr(divergence);
+        let r = c * Math.sqrt(n);
+
+        let x = r * Math.cos(a) + canvasWidth / 2;
+        let y = r * Math.sin(a) + canvasHeight / 2;
+
+        // RBG color based on dot angle
+        let aDegrees = (n * divergence) % 256;
+        let rgbColor = `rgb(${aDegrees},0,255)`;
+
+        // HSL color based on quadrant
+        let hslColor = `hsl(${aDegrees},100%,50%)`;
+
+        // Slowly ramp up hue
+        let hslRampColor = `hsl(${n / 5 % 361},100%,50%)`;
+
+        drawCircle(ctx, x, y, dotRadius, hslRampColor);
+    }
+
+    function restart() {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        n = 0;
+        c = 4;
+    }
+
+    function changeDivergence(value) {
+        divergence = parseFloat(value);
+        restart();
+    }
+
+	// helpers
+	function dtr(degrees){
+		return degrees * (Math.PI/180);
+	}
+
+	function drawCircle(ctx,x,y,radius,color){
+		ctx.save();
+		ctx.fillStyle = color;
+		ctx.beginPath();
+		ctx.arc(x,y,radius,0,Math.PI * 2);
+		ctx.closePath();
+		ctx.fill();
+		ctx.restore();
+	}
+
+	</script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <button onclick="restart()">Restart</button>
+    <label for="divergence-select">Divergence Angle:</label>
+    <select id="divergence-select" onchange="changeDivergence(this.value)">
+		<option value="137.1">137.1</option>
+		<option value="137.3">137.3</option>
+		<option value="137.5" selected>137.5</option>
+		<option value="137.7">137.7</option>
+		<option value="137.7">137.9</option>
+    </select>
+    <h2>How To Use:</h2>
+    <p>- Pulldown menu allows user to change divergence</p>
+    <p>- Restart button clears the canvas and resets necessary values</p>
+
+    <h2>Changes Made:</h2>
+    <p>- Added variables for dynamic parameters (c, divergence, fps, dotRadius)</p>
+    <p>- Added initial values and change rates for parameters</p>
+    <p>- Modified loop() to gradually increase c and divergence</p>
+    <p>- Added restart button and a select element for user control over the divergence angle</p>
+</body>
+</html>
