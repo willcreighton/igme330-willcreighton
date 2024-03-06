@@ -1,0 +1,28 @@
+{
+    "appInfo": {
+      "title": "Audio Visualizer"
+    },
+    "audioFiles": [
+      {
+        "fileName": "New Adventure Theme.mp3",
+        "metadata": {
+          "trackName": "New Adventure Theme",
+          "duration": "0:41"
+        }
+      },
+      {
+        "fileName": "Peanuts Theme.mp3",
+        "metadata": {
+          "trackName": "Peanuts Theme",
+          "duration": "1:58"
+        }
+      },
+      {
+        "fileName": "The Picard Song.mp3",
+        "metadata": {
+          "trackName": "The Picard Song",
+          "duration": "4:40"
+        }
+      }
+    ]
+}

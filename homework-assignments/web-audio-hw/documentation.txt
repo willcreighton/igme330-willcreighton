@@ -1,0 +1,28 @@
+I. Project Overview
+
+II. Audio Effect Nodes
+
+    A. Audio Effect Node 1 - Bass
+        1. Description: I added a Bass node to the app for the first additional audio effect.
+        2. Parameters: Starting at the value 0, users can slide between -50 and 50 for this
+           node. I found these values to be the best balance of fun and bearable.
+
+    B. Audio Effect Node 2 - Treble
+        1. Description: I added a Treble node to the app for the second additional audio effect.
+        2. Parameters: Starting at the value 0, users can slide between -30 and 30 for this
+           node. After continued testing, I found these values to be the most usable.
+
+III. Sprite Information
+
+    A. Class Name: [Your Sprite's class name]
+    B. Appearance: [Description of what the sprite looks like]
+    C. Functionality: [Description of what the sprite does in the visualization]
+
+IV. App Data in av-data.json
+
+    A. [Details of the data you added to av-data.json]
+
+V. Aesthetics Improvement
+
+    A. Description: [Explanation of how you improved the aesthetics of the app over the AV HW]
+    B. Self-Grade: [Your grade for this section, between 0% and 15%]
