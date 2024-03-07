@@ -1,11 +1,22 @@
 /*
-  main.js is primarily responsible for hooking up the UI to the rest of the application 
-  and setting up the main event loop
+    main.js is primarily responsible for hooking up the UI to the rest of the application
+    and setting up the main event loop.
 */
 
 import * as utils from './utils.js';
 import * as audio from './audio.js';
 import * as canvas from './canvas.js';
+
+let appData;
+
+fetch('./data/av-data.json')
+  .then(response => response.json())
+  .then(data => {
+    appData = data;
+  })
+  .catch(error => console.error('Error loading data:', error));
+
+export { appData };
 
 // Faking an enumeration
 const DEFAULTS = Object.freeze({
@@ -92,7 +103,7 @@ const setUpUI = (canvasElement) => {
   // set value of label to match initial value of slider
   volumeSlider.dispatchEvent(new Event("input"));
 
-  // Bass
+  // Bass set up
   bassSlider.oninput = (e) => {
     audio.setBass(e.target.value);
     bassLabel.innerHTML = e.target.value;
@@ -100,7 +111,7 @@ const setUpUI = (canvasElement) => {
 
   bassSlider.dispatchEvent(new Event("input"));
 
-  // Treble
+  // Treble set up
   trebleSlider.oninput = (e) => {
     audio.setTreble(e.target.value);
     trebleLabel.innerHTML = e.target.value;
@@ -120,6 +131,7 @@ const setUpUI = (canvasElement) => {
   };
 };
 
+// Define the target fps to cap the frame rate
 const targetFPS = 60;
 let lastFrameTime = performance.now();
 
@@ -131,7 +143,6 @@ const loop = () => {
   if (elapsed > 16.67) {
     lastFrameTime = currentTime;
 
-    // Your drawing code goes here
     canvas.draw(drawParams);
 
     // Schedule the next frame

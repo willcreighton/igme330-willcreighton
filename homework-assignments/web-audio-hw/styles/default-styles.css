@@ -1,42 +1,90 @@
 body {
-    background: #eeeeee;
-    font-family: tahoma, verdana, sans serif;
+    background: #1e1e1e;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
 }
-  
+
+main {
+    text-align: center;
+}
+
 canvas {
-    margin-left: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-    background: #fafafa;
+    box-shadow: 4px 4px 8px rgba(255, 255, 255, 0.2);
+    background: #2e2e2e;
+    max-width: 800px;
+    width: 100%;
 }
-  
+
 #controls {
-    margin-left: 1rem;
+    margin-top: 1rem;
 }
-  
-#volume-label {
-    margin-left: 1rem;
-}
-  
+
 section {
     margin-bottom: 1rem;
 }
-  
-#play-button {
+
+#volume-label {
+    margin-left: 0.5rem;
+}
+
+#play-button,
+#fs-button {
     font-size: 1.2rem;
     width: 6rem;
+    padding: 0.5rem;
+    background-color: #3498db;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
 }
-  
+
 button[data-playing="yes"]:after {
     content: "Pause";
 }
-  
+
 button[data-playing="no"]:after {
     content: "Play";
 }
-  
+
 #fs-button {
-    font-size: 1.2rem;
     width: 8rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+select, input {
+    margin-right: 0.5rem;
+    background-color: #2e2e2e;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+#track-select, #data-select {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+input[type="range"] {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+section:nth-child(3) {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+span {
+    flex: 0 0 calc(33.33% - 0.5rem);
+    margin-bottom: 0.5rem;
 }

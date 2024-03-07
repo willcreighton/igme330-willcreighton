@@ -24,5 +24,8 @@
           "duration": "4:40"
         }
       }
-    ]
+    ],
+    "spriteData": {
+        "spriteSize": 10
+    }
 }

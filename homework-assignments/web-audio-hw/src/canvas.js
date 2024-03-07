@@ -8,6 +8,7 @@
 */
 
 import * as utils from './utils.js';
+import { appData } from './main.js';
 
 let ctx, canvasWidth, canvasHeight, gradient, analyserNode, audioData;
 let isFrequencyData = true
@@ -45,7 +46,62 @@ const setupCanvas = (canvasElement, analyserNodeRef) => {
   });
 };
 
-const draw = (params = {}) => {
+// This class handles the creation and animation of squares that dance around the screen and scale to the frequency
+class MusicalSquare {
+    constructor(ctx, x, y, size, color, initialRotation = 0, initialVelocityX = 2, initialVelocityY = 1) {
+      this.ctx = ctx;
+      this.x = x;
+      this.y = y;
+      this.size = size;
+      this.color = color;
+      this.rotation = initialRotation;
+      this.velocityX = initialVelocityX;
+      this.velocityY = initialVelocityY;
+    }
+  
+    update() {
+      // Update the position based on velocity
+      this.x += this.velocityX;
+      this.y += this.velocityY;
+  
+      // Bounce off the right and left walls
+      if (this.x + this.size / 2 > canvasWidth || this.x - this.size / 2 < 0) {
+        this.velocityX = -this.velocityX;
+      }
+  
+      // Bounce off the bottom and top walls
+      if (this.y + this.size / 2 > canvasHeight || this.y - this.size / 2 < 0) {
+        this.velocityY = -this.velocityY;
+      }
+  
+      // Update the rotation angle over time
+      this.rotation += 0.01;
+
+      // Update the size based on the audioData values
+      const scaleMultiplier = 1 + audioData[0] / 255;
+      this.size = Math.max(10, Math.min(100, scaleMultiplier * 50));
+    }
+  
+    draw() {
+      this.ctx.save();
+  
+      // Translate the context to the center of the square
+      this.ctx.translate(this.x, this.y);
+  
+      // Rotate the square by the updated angle
+      this.ctx.rotate(this.rotation);
+  
+      // Draw the square
+      this.ctx.fillStyle = this.color;
+      this.ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+  
+      this.ctx.restore();
+    }
+  }
+  let musSquareA;
+  let musSquareB;
+
+  const draw = (params = {}) => {
   // 1 - Populate the audioData array with the frequency (or waveform) data from the analyserNode
   if (isFrequencyData) {
     analyserNode.getByteFrequencyData(audioData);
@@ -59,6 +115,19 @@ const draw = (params = {}) => {
   ctx.globalAlpha = 0.1;
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
   ctx.restore();
+
+  // Set up the musical squares
+  if (musSquareA == undefined) {
+    musSquareA = new MusicalSquare(ctx, canvasWidth / 2, canvasHeight / 2, appData.spriteData.spriteSize, "rgba(255, 0, 0, 0.5)");
+  }
+  musSquareA.update();
+  musSquareA.draw();
+
+  if (musSquareB == undefined) {
+    musSquareB = new MusicalSquare(ctx, canvasWidth / 2, canvasHeight / 2, appData.spriteData.spriteSize, "rgba(0, 0, 255, 0.5)", Math.PI / 4, 1, 2);
+  }
+  musSquareB.update();
+  musSquareB.draw();
 
   // 3 - Draw gradient
   if (params.showGradient) {
@@ -115,10 +184,6 @@ const draw = (params = {}) => {
   }
 
   // 6 - Bitmap manipulation
-  // TODO: Right now, we are looping through every pixel of the canvas (320,000 of them!),
-  // regardless of whether or not we are applying a pixel effect
-  // At some point, refactor this code so that we are looping through the image data only if
-  // it is necessary
 
   // A) Grab all of the pixels on the canvas and put them in the `data` array
   // `imageData.data` is a `Uint8ClampedArray()` typed array that has 1.28 million elements!

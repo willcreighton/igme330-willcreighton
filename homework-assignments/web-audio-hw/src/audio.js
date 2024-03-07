@@ -10,9 +10,6 @@ const DEFAULTS = Object.freeze({
   numSamples: 256
 });
 
-// Array to hold audio frequency data
-let audioData = new Uint8Array(DEFAULTS.numSamples / 2);
-
 // Public methods (exported at the bottom of the file)
 const setUpWebAudio = (filePath) => {
   // Create AudioContext
@@ -50,8 +47,8 @@ const setUpWebAudio = (filePath) => {
 
   // Connect the nodes - create the audio graph
   sourceNode.connect(analyserNode);
-  analyserNode.connect(bassNode); // Connect analyserNode to Bass node
-  bassNode.connect(trebleNode); // Connect Bass node to Treble node
+  analyserNode.connect(bassNode);
+  bassNode.connect(trebleNode);
   trebleNode.connect(gainNode);
   gainNode.connect(audioCtx.destination);
 };

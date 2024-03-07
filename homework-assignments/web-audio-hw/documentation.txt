@@ -1,4 +1,6 @@
 I. Project Overview
+    Homework 2, the Audio Visualizer overhaul. This program features a sleek darkmode display, paired with
+    additional sprites and audio effects for a fun, minimal, and appealing visualization.
 
 II. Audio Effect Nodes
 
@@ -14,15 +16,25 @@ II. Audio Effect Nodes
 
 III. Sprite Information
 
-    A. Class Name: [Your Sprite's class name]
-    B. Appearance: [Description of what the sprite looks like]
-    C. Functionality: [Description of what the sprite does in the visualization]
+    A. Class Name: MusicalSquare
+    B. Appearance: The sprite's appear as squares matching in color to the background, they
+       dynamically rotate and move around the screen.
+    C. Functionality: The sprite's visualization functionality is implemented through scale,
+       the frequency data is translated into a scalar the is applied to the sprites as they
+       traverse the screenspace.
 
 IV. App Data in av-data.json
 
-    A. [Details of the data you added to av-data.json]
+    A. Within the av-data.json file, I store general app information, such as it's name, "Audio Visualizer",
+       audioFiles, including the file name, track name, and track duration. I also store spriteData, namely
+       the sprite's size property. I use this data to modularly set the sprite's size in canvas.js.
 
 V. Aesthetics Improvement
 
-    A. Description: [Explanation of how you improved the aesthetics of the app over the AV HW]
-    B. Self-Grade: [Your grade for this section, between 0% and 15%]
+    A. Description: I started by playing around with color schemes, and as a fan of the cyberpunk genre atmoshpere,
+                    I opted for a cyberpunk-feeling gradient and color scheme. I also changed the overall site from
+                    lightmode to darkmode. I centered the controls and contents on screen and improved buttons for 
+                    easier usage and more appealing visuals. I also added two sprites that scale with the frequency.
+    B. Self-Grade:  Personally, I think there is a lot more that I could have done to improve this visually. I couldn't
+                    find the time, but also didn't manage my time the best, with my pre-break workload to properly
+                    overhaul the visuals. For these reasons, I'd probably give my visual score a 7/15, or a 7%.
