@@ -1,0 +1,52 @@
+#map {
+  width: 100%;
+  height: 400px;
+}
+
+/* https://icons8.com/icon/set/maps/material-rounded */
+.poi {
+  background-image: url("../images/icons8-location-96-color.png");
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.mapboxgl-popup-content p {
+  text-align: left;
+}
+
+#favorite-btn {
+    background-color: #5ddb6d;
+    border: none;
+    color: rgb(45, 45, 45);
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#delete-btn {
+    background-color: #e05555;
+    border: none;
+    color: rgb(45, 45, 45);
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
